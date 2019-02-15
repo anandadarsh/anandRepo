@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+	{% block title %}
+	{% endblock %}
+	</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   {% block extracss %}
+   {% endblock %}
+  </head>
+  <body>
+  
+  
+   <div class="text-center">
+  <h2>My First Bootstrap Page</h2>
+  <p>Resize this responsive page to see the effect!</p>
+</div>
+ {% if userName%}
+ <div style= "background-color: green;color:white;padding:2px;">
+  Hi {{userName}}
+ </div>
+ {% endif %}
+ <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/home">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+      <li><a href="/contact/contact-data">Contact-Data</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      {% if userName%}
+      <li><a href="/logout"><span class="glyphicon glyphicon-user"></span> LogOut</a></li>
+      {% else %}
+      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav> 
+
+<div class="container">
+   {% block content %}
+		
+    {% endblock %}
+</div> 
+   <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- Footer -->
+	<br><br>
+<footer class="page-footer font-small blue pt-4">
+  <div style = "background:black;padding:10px;color:white;" class="footer-copyright text-center py-3">© 2018 Copyright:
+      <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+    </div>
+</footer>
+  <!-- Footer -->
+  </body>
+</html>
+

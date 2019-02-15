@@ -1,0 +1,70 @@
+{% extends './layout.html'%}
+
+	{% block title %}
+		Contact
+	{% endblock %}
+	
+	{% block content %}
+	<div class="row">
+    {% if msg%}
+        
+        <div class="alert alert-success">
+            <strong>Success!</strong>{{msg}}.
+        </div>
+    {% endif  %}  
+		<div class="col-sm-12">
+			<p>
+			We will start by looking at complex types containing simple content because they are closest to simple types, which we've seen recently, and they also provide an easier transition to the more complex world of complex contents. We will not discuss the creation and derivation of simple types, already covered in Chapter 5, "Creating Simple Datatypes", but instead will focus on complex types' simple content models (i.e., elements having only text nodes and attributes) and study how they are created and derived. Here a Contact form.
+			</p>	
+		</div> 
+</div>
+			<div class="row">
+<div class = "col-sm-12">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Firstname</th>
+        <th>Email</th>
+        <th>password</th>
+        <th>Text</th>
+        <th>Opration</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if data and data.length > 0 %}
+  {% for x, data in data %}
+  <tr>
+     <td>
+      {{ x+1 }}
+    </td> 
+    <td>
+      {{ data.name }}
+    </td>  
+    <td>
+      {{ data.email }}
+    </td>
+     <td>
+      {{ data.password }}
+    </td>
+    <td>
+      {{ data.txt }}
+    </td>
+    <td>
+      <a  href = "/contact/edit/{{data._id.toString()}}">Edit</a> || <a href = "/contact/delete/{{data._id.toString()}}">Delete</a>
+    </td>
+  </tr>
+  {% endfor %}
+  {% else %}
+  <tr>
+    <td colspan = "5">
+      No recor found...
+    </td>  
+  </tr>
+  {% endif %}
+</tbody>
+</table>
+	</div>
+		</div>
+    {% endblock %}
+
