@@ -32,6 +32,7 @@ app.use('/static', express.static(__dirname + '/public'));
 app.use(function(req, res, next) {
   res.locals.userName = req.session.username;
   res.locals.userEmail = req.session.email;
+ 
   
   next();
 });

@@ -6,10 +6,13 @@ var sessionVar;
 
 	route.get('/',function(req, res){
 		sessionVar = req.session.msg;
-		if(sessionVar){
+		valerror = req.session.error
+		if(sessionVar || valerror){
 			delete req.session.msg;
+			delete req.session.error;
+				
 		}
-		res.render('contact',{msg:sessionVar}); 
+		res.render('contact',{msg:sessionVar,errors:valerror}); 
 		
 	});
 	

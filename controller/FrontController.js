@@ -6,26 +6,51 @@ const bcrypt = require('bcrypt');
 
 
 //save contact data
-exports.saveContact = function(req, res){
-	bcrypt.hash(req.body.password, 10, function(err, hash) {
-     MyformData = {
-      	'name':req.body.name,
-      	'email':req.body.email,
-      	'password':hash,
-      	'txt':req.body.txt,
-      	
-      };
-      
-	      contactModel.saveContact(MyformData, function callback(err, success){
-			if(err) throw err;
-			else
-			//res.status(201).json({ msg: 'User is created' });
-			req.session.msg = 'Contact has been Saved';
-			res.redirect('/contact');
-		});
-    });
-	
-}
+exports.saveContact = [
+
+  body('name', 'Name is required').isLength({ min: 1 }).trim(),
+  body('email', 'Email is required').isLength({ min: 1 }).trim(),
+  body('password', 'Password is required').isLength({ min: 1 }).trim(),
+  body('txt', 'Txt is required').isLength({ min: 1 }).trim(),
+  
+  sanitizeBody('name').trim().escape(),
+   sanitizeBody('email').trim().escape(),
+    sanitizeBody('password').trim().escape(),
+     sanitizeBody('txt').trim().escape(),
+
+function(req, res,next){
+		    const errors = validationResult(req);
+
+		   if(!errors.isEmpty()){
+		   	req.session.error = errors.array();
+		   	 res.redirect('/contact');
+		   }
+		   else{
+		   	req.session.error = null;
+				    bcrypt.hash(req.body.password, 10, function(err, hash) {
+				     MyformData = {
+				      	'name':req.body.name,
+				      	'email':req.body.email,
+				      	'password':hash,
+				      	'txt':req.body.txt,
+				      	
+				      };
+					    contactModel.saveContact(MyformData, function callback(err, success){
+							if(err) throw err;
+							else
+							//res.status(201).json({ msg: 'User is created' });
+							req.session.msg = 'Contact has been Saved';
+							res.redirect('/contact');
+						});
+				    });
+
+		   }
+  
+     }
+
+]
+
+
 
 //get contact data..
 exports.getContactData = function(req,res){

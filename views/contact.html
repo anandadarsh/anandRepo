@@ -7,7 +7,22 @@
 	{% block content %}
 	<div class="row">
 		<div class="col-sm-12">
+			 <div class="form-header">
+ {% if errors.length > 0 %}
+      <ul>
+    {% for key, error in errors %}
+        <div class="alert alert-danger">
+          <li> {{error.msg}}</li>
+          </div>
+
+    {% endfor %}
+  </ul>
+{% endif %}   
+     
+</div>
 			<p>
+				
+
 
   		{% if msg%}
 				

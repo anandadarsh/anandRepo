@@ -1,7 +1,7 @@
 var mongojs = require('mongojs');
 var db = mongojs(process.env.DB_NAME,['contact']);
 
-exports.saveContact = function(req,callback){
+exports.saveContact = function(MyformData,callback){
 	db.contact.insert(MyformData,callback);
 }
 
